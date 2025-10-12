@@ -1,16 +1,13 @@
 import express from "express"
+import {config} from 'dotenv'
+
+config();
 
 const app=express();
 
-//GET - 
-//PUT
-//POST
-//DELETE
+//middlewear defining 
+app.use(express.json());
 
-//routes endpoints
-app.get("/hello",(req,res,next)=>{
-  return res.send("Hello");
-})
-
-
+//connections and listeneres
 app.listen(5001,()=>console.log("Server Open"))
+
