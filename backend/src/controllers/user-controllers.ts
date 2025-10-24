@@ -68,6 +68,9 @@ export const userLogin = async(
             return res.status(403).send("Incorrect Password");
         }
 
+        //to remove the previous cookie
+        res.clearCookie("auth_token");        
+
         //token is inside this string
         const token = createToken(user._id.toString(),user.email,"7d");
         const expires = new Date();
