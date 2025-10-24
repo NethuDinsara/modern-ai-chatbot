@@ -76,7 +76,9 @@ export const userLogin = async(
         res.cookie("auth_token",token,{
             path: "/",
             domain: "localhost", //can change when deployed
-            expires: ""
+            expires,
+            httpOnly: true,
+            signed: true,//signing the whole cookie ( this encrypt the cookie )
         }); // cookie will create inside the browser
 
         // if its corect
