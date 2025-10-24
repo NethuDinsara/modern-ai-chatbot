@@ -70,8 +70,15 @@ export const userLogin = async(
 
         //token is inside this string
         const token = createToken(user._id.toString(),user.email,"7d");
+        const expires = new Date();
+        expires.setDate(expires.getDate()+7);// 7 days from the date it expires
+        //to send to cookie from BE to FE using res variable
+        res.cookie("auth_token",token,{
+            path: "/",
+            domain: "localhost", //can change when deployed
+            expires: ""
+        }); // cookie will create inside the browser
 
-        
         // if its corect
         return res.status(200).json({message:"OK",id: user._id.toString() });
        
