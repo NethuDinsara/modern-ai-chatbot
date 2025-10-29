@@ -3,7 +3,7 @@ import { getAllUsers, userLogin, userSigUp } from '../controllers/user-controlle
 import {LoginValidator, signupValidator, validate} from '../utils/validators.js'
 
 const userRoutes= Router();
-
+//defining routes
 userRoutes.get("/",getAllUsers);
 userRoutes.post("/signup",validate(signupValidator),userSigUp);
 userRoutes.post("/login",validate(LoginValidator),userLogin);
