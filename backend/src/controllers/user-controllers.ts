@@ -4,7 +4,8 @@ import { Request, Response, NextFunction } from "express";
 import User from "../models/User.js";
 import {hash,compare} from 'bcrypt';
 import { createToken } from "../utils/token-manager.js";
-
+import { COOKIE_NAME } from "../utils/constants.js";
+//cookie can be saved for 7 days then the user needs to reloggin
 
 export const getAllUsers = async(
     req:Request,
@@ -30,6 +31,7 @@ export const userSigUp = async(
     //user sign up
     try{
 
+         //user sign up
         const {name,email,password} =req.body;
         //checking for already exists or not ?
         const existingUser = await User.findOne({email});
@@ -38,6 +40,15 @@ export const userSigUp = async(
         const hashedPassword = await hash(password,10);
         const user= new User({name,email,password:hashedPassword}); //new instance of user will create 
         await user.save(); 
+
+        // create token and store cooie
+        res.clearCookie(COOKIE_NAME,{
+            httpOnly:true,
+            domain:"localhost",
+            signed:true,
+            path:"/"
+        });    
+
         return res.status(201).json({message:"OK", id: user._id.toString() });
 
     }catch(error){
@@ -69,14 +80,19 @@ export const userLogin = async(
         }
 
         //to remove the previous cookie
-        res.clearCookie("auth_token");        
+        res.clearCookie(COOKIE_NAME,{
+            httpOnly:true,
+            domain:"localhost",
+            signed:true,
+            path:"/"
+        });        
 
         //token is inside this string
         const token = createToken(user._id.toString(),user.email,"7d");
         const expires = new Date();
         expires.setDate(expires.getDate()+7);// 7 days from the date it expires
         //to send to cookie from BE to FE using res variable
-        res.cookie("auth_token",token,{
+        res.cookie(COOKIE_NAME,token,{
             path: "/",
             domain: "localhost", //can change when deployed
             expires,
