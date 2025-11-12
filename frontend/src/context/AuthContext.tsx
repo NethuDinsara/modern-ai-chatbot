@@ -1,4 +1,4 @@
-  import {Children, createContext, useEffect, useState, type ReactNode} from 'react';
+  import {Children, createContext, useContext, useEffect, useState, type ReactNode} from 'react';
 
   type User = {
     name:string;
@@ -19,7 +19,7 @@
   //since we are using typescript we should provide a value tho
 
   //authprovider will wrap all the children around context
-  const AuthProvider = ({children}:{children: ReactNode}) =>{
+  export const AuthProvider = ({children}:{children: ReactNode}) =>{
     const [user, setUser] =useState<User |null>(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -43,3 +43,6 @@
         return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 
   };
+
+  //context that should be defined by the children
+  export const useAuth = () => useContext(AuthContext);
