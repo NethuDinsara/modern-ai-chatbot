@@ -4,6 +4,7 @@ import './index.css'
 import App from './App.tsx'
 import { createTheme,ThemeProvider } from '@mui/material'
 import {BrowserRouter} from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext.tsx'
 
 //to add a theme with predefined fonts and colors
 const theme = createTheme({typography:{
@@ -13,11 +14,12 @@ const theme = createTheme({typography:{
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <ThemeProvider theme={theme}> 
-        <App />
-      </ThemeProvider>
-    </BrowserRouter>
-
+    <AuthProvider>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}> 
+          <App />
+        </ThemeProvider>
+      </BrowserRouter>
+    </AuthProvider>
   </StrictMode>,
 )
