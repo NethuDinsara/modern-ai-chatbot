@@ -23,5 +23,23 @@
     const [user, setUser] =useState<User |null>(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    useEffect(()=>{},)
+    useEffect(() => {
+        //fetch if the user cookies are valid skip login
+    }, []);
+
+        const login = async(email: string, password: string) => { };
+        const signup = async(name: string, email:string, password: string) => {};
+        const logout = async () => {};
+
+        //creating values
+        const value = {
+            user,
+            isLoggedIn,
+            login,
+            logout,
+            signup,
+        }; 
+        //now should return all the stakes above
+        return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+
   };
