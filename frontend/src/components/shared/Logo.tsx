@@ -19,8 +19,9 @@ const Logo = () => {
             width={'30px'} 
             height={'30px'} 
             className='image-inverted' />
+        </Link>{" "}
 
-            <Typography 
+        <Typography 
             sx={{
                 display: { md:"block", sm:"none", xs:"none" }, 
                 mr:"auto",
@@ -30,9 +31,6 @@ const Logo = () => {
             >
                 <span style={{ fontSize: "20px"}}>MERN</span>-GPT
             </Typography>
-
-
-        </Link>
 
     </div>
   )
