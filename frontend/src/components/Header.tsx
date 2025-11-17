@@ -17,15 +17,17 @@ const Header = () => {
         <Toolbar sx={{display:"flex"}}>
             <Logo />
             <div>
-              {auth?.isLoggedIn ? 
+              {auth?.isLoggedIn ? (
                 <>
                 <NavigationLink bg='#00fffc' to='/chat' text='Go to Chat' textColor='black'/>
                 <NavigationLink bg='#51538f' textColor='white' to='/' text='logout' onClick={auth.logout}/>
-                </> : 
+                </> 
+                ): (
                 <>
                 <NavigationLink bg='#00fffc' to='/chat' text='Go to Chat' textColor='black'/>
                 <NavigationLink bg='#51538f' textColor='white' to='/' text='logout' />
-                </>}
+                </>
+              )}
             </div>
         </Toolbar>
         
