@@ -16,7 +16,10 @@ const Header = () => {
 
         <Toolbar sx={{display:"flex"}}>
             <Logo />
+
+            {/* renta div from MUI */}
             <div>
+              {/* if the user loggedin */}
               {auth?.isLoggedIn ? (
                 <>
                 <NavigationLink 
@@ -24,6 +27,7 @@ const Header = () => {
                   to='/chat' 
                   text='Go to Chat' 
                   textColor='black'/>
+
                 <NavigationLink 
                   bg='#51538f' 
                   textColor='white' 
@@ -31,21 +35,27 @@ const Header = () => {
                   text='logout' 
                   onClick={auth.logout}/>
                 </> 
+
                 ): (
+
                 <>
                 <NavigationLink 
                   bg='#00fffc' 
                   to='/login' 
                   text='Login' 
                   textColor='black'/>
+
                 <NavigationLink 
                   bg='#51538f' 
                   textColor='white' 
                   to='/signup' 
                   text='SignUP' />
+
                 </>
+                
               )}
             </div>
+
         </Toolbar>
         
     </AppBar>
